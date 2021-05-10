@@ -1,0 +1,10 @@
+[workspace]
+
+members = [
+    "trib_macros",
+    "app",
+]
+
+[profile.release]
+lto = true
+

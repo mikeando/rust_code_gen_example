@@ -1,0 +1,18 @@
+[package]
+name = "rust_gen_const_vs_lazy_static"
+version = "0.1.0"
+authors = ["Michael Anderson <drmikeando@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+"lazy_static" = "1.4.0"
+trib_macros = { path = "../trib_macros" }
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
