@@ -1,5 +1,3 @@
-
-
 pub mod constants {
     include!(concat!(env!("OUT_DIR"), "/constants.rs"));
 }
@@ -10,24 +8,19 @@ pub mod ls {
     lazy_static! {
         //TODO: Should this be a pow(1.0/3.0)?
         pub static ref cbrt_33_mul_3: f64 = 3.0 * 33.0f64.powf(0.5);
-        
+
         pub static ref tribonacci_constant: f64 = 1.0
         + (19.0 - *cbrt_33_mul_3).powf(1.0 / 3.0)
         + (19.0 + *cbrt_33_mul_3).powf(1.0 / 3.0);
     }
 
     pub fn tribonacci(n: f64) -> f64 {
-        return (
-            (*tribonacci_constant / 3.0).powf(n)
-            / (
-                (4.0 / 3.0)
-                * *tribonacci_constant
-                - (1.0 / 9.0)
-                * tribonacci_constant.powf(2.0) - 1.0
-            )
-        ).round();
+        return ((*tribonacci_constant / 3.0).powf(n)
+            / ((4.0 / 3.0) * *tribonacci_constant
+                - (1.0 / 9.0) * tribonacci_constant.powf(2.0)
+                - 1.0))
+            .round();
     }
-
 }
 
 pub mod hc {
@@ -39,13 +32,12 @@ pub mod hc {
 }
 
 pub mod mc {
-    use trib_macros::{ts,tp};
+    use trib_macros::{tp, ts};
 
     pub fn tribonacci(n: f64) -> f64 {
         return (ts!() * tp!().powf(n)).round();
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -53,13 +45,12 @@ mod tests {
 
     #[test]
     fn it_works() {
-
         println!("{}", *ls::tribonacci_constant / 3.0);
-        println!("{}", 1.0 / (
-            (4.0 / 3.0)
-            * *ls::tribonacci_constant
-            - (1.0 / 9.0)
-            * ls::tribonacci_constant.powf(2.0) - 1.0
-        ));
+        println!(
+            "{}",
+            1.0 / ((4.0 / 3.0) * *ls::tribonacci_constant
+                - (1.0 / 9.0) * ls::tribonacci_constant.powf(2.0)
+                - 1.0)
+        );
     }
 }
